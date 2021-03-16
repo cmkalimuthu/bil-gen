@@ -2,7 +2,7 @@
 
 function date_generator($start_date,$end_date)
 {
-	$dates = array($start_date);
+  $dates = array($start_date);
     while(end($dates) < $end_date){
         $dates[] = date('Y-m-d', strtotime(end($dates).' +1 day'));
     }
@@ -10,20 +10,20 @@ function date_generator($start_date,$end_date)
 }
 function retrieve_data($start_date,$end_date,$route_no,$random)
 {
-	global $con;
-	$query="SELECT distinct Dates from $route_no where Dates between '$start_date' and '$end_date' and random='$random' ";
-	      	
+  global $con;
+  $query="SELECT distinct Dates from $route_no where Dates between '$start_date' and '$end_date' and random='$random' ";
+          
 
     $res=mysqli_query($con,$query);
     $i=0;
     $date=array();
     while ($row = $res->fetch_assoc()) {
     //fetch one by one data from db
-		$dates=$row['Dates'];
-		$dates=date("d-m-Y",strtotime($dates)); 
-		$date[]=$dates;
+    $dates=$row['Dates'];
+    $dates=date("d-m-Y",strtotime($dates)); 
+    $date[]=$dates;
 }
-           return $date;		
+           return $date;    
 }
 
 function getIndianCurrency(float $number)
@@ -63,16 +63,16 @@ function getIndianCurrency(float $number)
 
 }
 
-function audit_insertion($route_no,$from_date,$todate,$total,$word){
-	global $con;
+function audit_insertion($route_no,$from_date,$todate,$total,$word,$link){
+  global $con;
   $date=date("d-m-Y");
-$sql="INSERT INTO audit(Route_No,From_Date,To_Date,Total_Price,Currency,Entry_Date)values('$route_no','$from_date','$todate','$total','$word','$date')";
+$sql="INSERT INTO audit(Route_No,From_Date,To_Date,Total_Price,Currency,Entry_Date,Link)values('$route_no','$from_date','$todate','$total','$word','$date','$link')";
 $res=mysqli_query($con,$sql);
 
 }
 function fetch_user_detail($route_no){
-	global $con;
-	 $query="SELECT Owner_Name,Vehicle_No,Trip_Type,Km,Address,Trip_Count from users where Route_No=$route_no";
+  global $con;
+   $query="SELECT Owner_Name,Vehicle_No,Trip_Type,Km,Address,Trip_Count from users where Route_No=$route_no";
       
             
       $res=mysqli_query($con,$query);
@@ -87,18 +87,18 @@ function fetch_user_detail($route_no){
                     $trip_count=$rows['Trip_Count'];
                 }
          $result=array(
-         	'owner_name' =>$owner_name,
-         	'vehicle_no' =>$vehicle_no,
-         	'address'    =>$address,
-         	'trip_type'	 =>$trip_type,
+          'owner_name' =>$owner_name,
+          'vehicle_no' =>$vehicle_no,
+          'address'    =>$address,
+          'trip_type'  =>$trip_type,
           'km'         =>$km,
           'trip_count' =>$trip_count
          );
          return $result;
 }
 function fetch_dates_from_audit($route_no){
-	global $con;
-	$query="SELECT From_Date,To_Date,Total_Price,Currency,S_No from audit  where Route_No=$route_no";
+  global $con;
+  $query="SELECT From_Date,To_Date,Total_Price,Currency,S_No from audit  where Route_No=$route_no";
                 $res=mysqli_query($con,$query);
                 while($rows=$res->fetch_assoc())
                   {
@@ -113,24 +113,24 @@ function fetch_dates_from_audit($route_no){
                $To_Date=date("d-m-Y",strtotime($To_Date));
 
                $dates=array(
-               	'from_date'=>$From_Date,
-               	'todate'   =>$To_Date,
-               	'total_price' =>$Total_Price,
-               	'currency'	=>$Currency,
-               	's_no' =>$S_No
+                'from_date'=>$From_Date,
+                'todate'   =>$To_Date,
+                'total_price' =>$Total_Price,
+                'currency'  =>$Currency,
+                's_no' =>$S_No
                );
                return $dates;
 }
 
 
 function fetch_dates_from_route($route_no,$from_date,$todate,$random){
-	global $con;
-	$table='r_'.$route_no;
-	$period=array();
+  global $con;
+  $table='r_'.$route_no;
+  $period=array();
 
-	$query="SELECT Dates from $table where Dates between '$from_date' and '$todate' and random=$random";
+  $query="SELECT Dates from $table where Dates between '$from_date' and '$todate' and random=$random";
 
-	
+  
                 $res=mysqli_query($con,$query);
                 while($rows=$res->fetch_assoc())
                   {
@@ -140,11 +140,11 @@ function fetch_dates_from_route($route_no,$from_date,$todate,$random){
                 return $period;
 }
 function fetch_price_from_route($route_no,$from_date,$todate,$random){
-	global $con;
-	$table='r_'.$route_no;
-	$price=array();
-	$query="SELECT price from $table where Dates between '$from_date' and '$todate' and random=$random";
-	
+  global $con;
+  $table='r_'.$route_no;
+  $price=array();
+  $query="SELECT price from $table where Dates between '$from_date' and '$todate' and random=$random";
+  
                 $res=mysqli_query($con,$query);
                 while($rows=$res->fetch_assoc())
                   {

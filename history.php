@@ -16,6 +16,7 @@
         $currency=array();
         $entry_date=array();
         $route_no=array();
+        $link=array();
         while($rows=$res->fetch_assoc())
           {
           	$route_no[]=$rows['Route_No'];
@@ -24,6 +25,7 @@
           	$total_price[]=$rows['Total_Price'];
           	$currency[]=$rows['Currency'];
           	$entry_date[]=$rows['Entry_Date'];
+          	$link[]=$rows['Link'];
           }
           // $data=array(
           // 	'from_date'=>$from_date,
@@ -33,7 +35,7 @@
           // 	'entry_date'=>$entry_date
           // );
           ?>
-          <div class="table-responsive-sm">
+          <div class="table-responsive-sm"> 
           <table class="table table-dark table-striped table-bordered">
   <thead>
     <tr>
@@ -43,6 +45,8 @@
       <th scope="col">Total_Price</th>
       <th scope="col">Currency</th>
       <th scope="col">Entry Date</th>
+      <th scope="col">Download link</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -61,6 +65,8 @@
           	<td class='text-success'>$total_price[$k]</td>
           	<td class='text-success'>$currency[$k]</td>
           	<td class='text-success'>$entry_date[$k]</td>
+          	<td class='text-success'><a href='$link[$k]'>Download</a></td>
+          	
           	</tr>";
           	$k++;
           	$length--;
@@ -79,9 +85,9 @@
     else{
  ?>
    <div class="container"> 
-<h1 class="text-success">History</h1>
+
 </div>
-<div class="container">
+<div class="container text-success"> 
 <form method="get" action="">
   <div class="form-group">
                 <label for="vehicle_no">Entry-Date</label>
@@ -89,9 +95,9 @@
                 <small class="text-muted">*required</small>
 
    	</div>
-   <input type="submit" class="btn btn-primary form-control" value="show" name="">
+   <input type="submit" class="btn btn-dark form-control text-success" value="show" name="">
    </form>
-   </div>
+ </div>
 <?php
 }
 include 'includes/overall_footer.php'; ?>

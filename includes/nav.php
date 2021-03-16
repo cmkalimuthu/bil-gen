@@ -8,6 +8,7 @@
                 <a href="index.php" class="nav-link ">Home</a>
                 <a href="history.php" class="nav-link">History</a>
                 <a href="registration.php" class="nav-link">Register</a>
+                <a href="dashboard.php" class="nav-link">Dashboard</a>
                 <!-- <a href="" class="nav-link">about</a>
                 <a href="" class="nav-link">discover</a> -->
             </div>
