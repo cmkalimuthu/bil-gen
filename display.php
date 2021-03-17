@@ -60,7 +60,7 @@ if(isset($_GET['route_no'])===true){
 }
 @page {
     size: auto;   /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
+    margin: 10;  /* this affects the margin in the printer settings */
 }
 th, td {
   padding: 5px;
